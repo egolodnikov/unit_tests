@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class TestMain {
+public class MainTest {
 
     @Test
     public void test_is_triangle_1() {
