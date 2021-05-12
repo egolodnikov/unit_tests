@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMyHomeWork {
     @Test
-    public void test_is_main() {
-        // check main program invoke
+    public void test_is_main_triangle() {
+        // check main program with triangle
         String input = "3\n4\n5\n";
 
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
@@ -28,6 +28,29 @@ public class TestMyHomeWork {
         consoleOutput += "Enter side 2: " + System.getProperty("line.separator");
         consoleOutput += "Enter side 3: " + System.getProperty("line.separator");
         consoleOutput += "This is a triangle." + System.getProperty("line.separator");
+
+        assertEquals(consoleOutput, out.toString());
+    }
+
+    @Test
+    public void test_is_main_not_triangle() {
+        // check main program with not triangle
+        String input = "1\n1\n2\n";
+
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        // invoke
+        String[] args = {};
+        MyHomeWork.main(args);
+
+        // expected output
+        String consoleOutput = "Enter side 1: " + System.getProperty("line.separator");
+        consoleOutput += "Enter side 2: " + System.getProperty("line.separator");
+        consoleOutput += "Enter side 3: " + System.getProperty("line.separator");
+        consoleOutput += "This is not a triangle." + System.getProperty("line.separator");
 
         assertEquals(consoleOutput, out.toString());
     }
@@ -133,6 +156,30 @@ public class TestMyHomeWork {
     public void test_is_not_triangle_12() {
         // one side less 0
         assertFalse(MyHomeWork.isTriangle(-3, +4, +5));
+    }
+
+    @Test
+    public void test_is_not_triangle_13() {
+        // all sides < 0 and a + b = c
+        assertFalse(MyHomeWork.isTriangle(-1, -2, -3));
+    }
+
+    @Test
+    public void test_is_not_triangle_14() {
+        // all sides < 0, but all sides equal
+        assertFalse(MyHomeWork.isTriangle(-1, -1, -1));
+    }
+
+    @Test
+    public void test_is_not_triangle_15() {
+        // c + a = b
+        assertFalse(MyHomeWork.isTriangle(1, 3, 2));
+    }
+
+    @Test
+    public void test_is_not_triangle_16() {
+        // b + c = a
+        assertFalse(MyHomeWork.isTriangle(3, 1, 2));
     }
 
 }
